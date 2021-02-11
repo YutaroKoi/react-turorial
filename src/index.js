@@ -22,6 +22,10 @@ class Board extends React.Component {
         // タイムトラベル機能の実装をするため、イミュータブルが望ましい
         // https://ja.reactjs.org/tutorial/tutorial.html#why-immutability-is-important
         const squares = this.state.squares.slice();
+        // 勝っている or すでに埋めてるマスを押した場合は早期リターンする
+        if (calculateWinner(squares) || squares[i]) {
+            return;
+        }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             squares: squares,
